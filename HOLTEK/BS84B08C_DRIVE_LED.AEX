@@ -1,0 +1,14 @@
+;;*************************************************
+;;***** LIBRARY EXTERNAL REFERENCE FOR ASM CODE   *
+;;*************************************************
+EXTERN 	_LED_V002_D1123						:NEAR   ;用于验证库函数中的版本号
+;-SUBROUTIN
+EXTERN 	_BS84B08C_DRIVR_LED_START						:NEAR   ;LED Scan entry
+;-DATA
+EXTERN 	_DISP_BUF										:byte		;scan 8byte  _DISP_BUF[0]-_DISP_BUF[7]
+;-FLAG 
+EXTERN _CHK_LEDF										:bit		;Check whether the digital tube is scanned
+
+;;========NEED EXTERNDATA ===========
+PUBLIC _DRIVR_LED_RETURN				;;Subroutine return position
+;;================================

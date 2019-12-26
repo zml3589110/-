@@ -1,0 +1,58 @@
+;;*************************************************
+;;***** LIBRARY EXTERNAL REFERENCE FOR ASM CODE   *
+;;*************************************************
+EXTERN 	_COMUNICA_V002D1125			:NEAR   ;用于验证库函数中的版本号
+
+;-SUBROUTIN
+EXTERN 	_SINGLE_COMUNICA_PORTAL			:NEAR   ;SINGLE COMUNICA entry
+;-DATA
+
+EXTERN 	_TEMP_MAIN									:BYTE		;炉面温度AD
+EXTERN 	_TEMP_IGBT									:BYTE		;IGBT温度AD
+EXTERN 	_ERRORCODE									:BYTE		;故障代码
+EXTERN 	_DEBUG_DATA									:BYTE		;调试数据
+EXTERN 	_ERRORJS										:BYTE		;通讯故障计数
+EXTERN 	_HEATHUOLI									:BYTE		;目标火力
+EXTERN 	_DEBUG_STAGE								:BYTE		;调试组数
+EXTERN 	_DEBUG_STAGE1								:BYTE		;调试参数1
+EXTERN 	_CTRL_FLAG									:BYTE		;控制标志位
+EXTERN 	_CTRL_FLAG1									:BYTE		;控制标志位1
+;-FLAG 
+;;EXTERN _READ_OKF										:BIT		;Check whether the digital tube is scanned
+;;========NEED EXTERNDATA ===========
+PUBLIC _SINGLE_COMUNICA_RETUREN				;;Subroutine return position
+PUBLIC _READ_OKF											;;Check whether the digital tube is scanned
+;;================================
+
+;*****************************************************************************
+;*****************************************************************************
+;*****************************************************************************
+;*****************************************************************************
+;;====================各组数据含义==============
+;***************************************************************************** 
+;********************************bank3**************************************
+temp_main					equ		_TEMP_MAIN
+temp_igbt					equ		_TEMP_IGBT
+errcode						equ		_ERRORCODE
+debug_data				equ		_DEBUG_DATA			;;主板传回查询参数
+errorjs						equ		_ERRORJS
+;r_bit2			equ		errorjs.2
+heathuoli					equ		_HEATHUOLI
+debug_stage				equ		_DEBUG_STAGE		;;调参数
+adjpower				equ		_DEBUG_STAGE1		;;控制功率
+;********************************bank0**************************************
+;_CTRL_FLAG				DB 		?		;;位置固定好-不允许更改
+b_debug     equ		_CTRL_FLAG.0		 	;调出计数控制标志位
+byuyuests   equ		_CTRL_FLAG.1		 	;当前状态已经按下了预约设置键标志
+b_relay     equ		_CTRL_FLAG.2		 	;继电器控制标志
+b_linheat   equ		_CTRL_FLAG.3		 	;内圈标志(针对电陶炉)
+b_linheat1  equ		_CTRL_FLAG.4		 	;外圈标志(针对电陶炉)
+b_fan      	equ		_CTRL_FLAG.5		 	;强制风扇转动标志
+bbuzzlong 	equ		_CTRL_FLAG.6		 	;蜂鸣器长鸣控制
+
+;_CTRL_FLAG1				DB 		?		;;位置固定好-不允许更改
+b_c_noheat	equ		_CTRL_FLAG1.0			;系统不加热控制标志
+bbuz200ms		equ		_CTRL_FLAG1.1			;蜂鸣器控制
+b_Initial		equ		_CTRL_FLAG1.2			;初始化参数
+b_poweradj	equ		_CTRL_FLAG1.3			;目标功率全由上位机定
+Reserve17		equ		_CTRL_FLAG1.4			;预留17
